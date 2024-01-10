@@ -17,10 +17,14 @@ class NN(nn.Module):
 
         # we will make a simple 1 hidden layer network that has 50 nodes (input:50:num_classes)
         self.fc1 = nn.Linear(input_size, 50) #fully connected layer - connects each input feature to 50 output features, using a linear transformation
+        self.fc15 = nn.Linear(50, 100)
+        self.fc155 = nn.Linear(100, 50)
         self.fc2 = nn.Linear(50, num_classes)
 
     def forward(self, x): # x is our input data
         x = F.relu(self.fc1(x)) # relu will be applied to the output of fc1 - relu adds non-linearity - notice the operator overload with fc1
+        x = F.relu(self.fc15(x)) # relu will be applied to the output of fc15 - relu adds non-linearity - notice the operator overload with fc15
+        x = F.relu(self.fc155(x)) # relu will be applied to the output of fc155 - relu adds non-linearity - notice the operator overload with fc155
         x = self.fc2(x) # output of relu is passed to the final layer
         return x
 
@@ -108,3 +112,11 @@ def check_accuracy(loader, model):
 
 check_accuracy(train_loader, model)
 check_accuracy(test_loader, model)
+
+'''
+TODO:
+advanced concepts
+improvements
+visualize
+custom data
+'''
